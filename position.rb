@@ -8,9 +8,7 @@ class Position
     @coords = coords
     @adj_list = []
   end
-  
-  public 
-  
+
   def add_adjacent(node)
     adj_list << node
   end

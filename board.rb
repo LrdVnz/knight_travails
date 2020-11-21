@@ -8,15 +8,13 @@ class Board
     @board = []
     create_board
   end
- 
-  public 
-  
+
   def create_board
     j = 0
-    0.upto(7) do
+    while j < 8
       row = []
       i = 0
-      0.upto(7) do
+      while i < 8
         coords = [j, i]
         row << coords
         i += 1
