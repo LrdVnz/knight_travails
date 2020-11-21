@@ -1,94 +1,38 @@
-require 'pry'
-
 # frozen_string_literal: true
 
+# Dummy class for showing the board
 class Board
   attr_reader :board
+
   def initialize
     @board = []
     create_board
   end
-
+ 
+  public 
+  
   def create_board
-    coord = [0, 0]
     j = 0
     0.upto(7) do
-      arr = []
+      row = []
       i = 0
       0.upto(7) do
-        coord = [j, i]
-        arr << coord
+        coords = [j, i]
+        row << coords
         i += 1
       end
       j += 1
       i = 0
-      @board << arr
+      board << row
     end
-    @board.each { |a| p a }
+    show_board(board)
   end
 
+  private
+
+  def show_board(board)
+    print "Here's your board : \n "
+    print "\n"
+    board.each { |row| p row }
+  end
 end
-
-class Knight
-  attr_accessor :pos
-  def initialize(a, b)
-    @pos = [a , b]   
-  end
-
-  #all moves combination are binary tree. traverse the tree recursively and stop at the path that gives the solution.
-  def moveto(goal, pos)
-
-    if pos === goal
-      return 
-    elsif (pos[0] < 0 ||  pos[0] > 7) || ( pos[1] < 0 ||  pos[1] > 7) 
-      pos = @pos 
-      return 
-    end 
-
-     pos[0] -= 2
-     pos[1] -= 1
-    moveto(goal,  pos)
-     
-     pos[0] -= 1
-     pos[1] -= 2
-    moveto(goal,  pos)
-    
-     pos[0] -= 2
-     pos[1] += 1
-    moveto(goal,  pos)
-      
-     pos[0] += 2
-     pos[1] -= 1
-    moveto(goal,  pos)
-
-     pos[0] += 1
-     pos[1] -= 2
-    moveto(goal,  pos)
-    
-     pos[0] -= 1
-     pos[1] += 2
-    moveto(goal,  pos)
-
-     pos[0] += 2
-     pos[1] += 1
-    moveto(goal,  pos)
-
-     pos[0] += 1
-     pos[1] += 2
-    moveto(goal,  pos)
-
-    print " \n pos after : #{pos} \n"
-  end
-  
-end
-
-k = Knight.new(3,3)
-Board.new
-
-k.moveto([6,4], [3,3])
- 
-binding.pry
-
-
-
-
