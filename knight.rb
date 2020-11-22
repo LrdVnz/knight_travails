@@ -3,15 +3,16 @@
 load 'position.rb'
 load 'moves.rb'
 load 'board.rb'
-load 'calculate_path.rb'
+load 'get_path.rb'
 
 # Knight class. Holds main function
 class Knight < Moves
-  include CalculatePath
+  include GetPath
   attr_reader :moves, :arrays
 
   def initialize
-    @moves = Moves.new
+    super
+    @moves = Moves.new.list
     @arrays =
       {
         'queue' => [],
@@ -21,37 +22,48 @@ class Knight < Moves
   end
 
   def moveto(start, goal)
-    print "\n Calculating shortest path from #{start} to #{goal} .... \n"
-    current = Position.new(start)
-    arrays['queue'] << current
+    moveto_start(start, goal)
     loop do
-      current = arrays['queue'].shift
-      arrays['visited'] << current
-      if start == goal
-        print 'start goal same'
-        return
-      end
-      i = 0
-      while i < 8
-        move_result = make_move(moves.list[i], current.coords)
-        unless move_result.nil?
-          move_result = Position.new(move_result)
-          push_result(arrays, current, move_result) unless arrays['visited'].include?(move_result)
-          if move_result.coords == goal
-            calculate_path(arrays['previous_nodes'], start, goal)
-            return
-          end
-        end
-        i += 1
+      current = take_current
+      return get_path(arrays['previous_nodes'], start, goal) if start == goal
+
+      @i = 0
+      while @i < 8
+        move_res = get_result(current)
+        return get_path(arrays['previous_nodes'], start, goal) if !move_res.nil? && move_res.coords == goal
+
+        @i += 1
       end
     end
   end
 
-  def push_result(arrays, current, move_result)
+  def take_current
+    current = arrays['queue'].shift
+    arrays['visited'] << current
+    current
+  end
+
+  def get_result(current)
+    move_result = make_move(moves[@i], current.coords)
+    move_result_push(move_result, current) unless move_result.nil?
+  end
+
+  def moveto_start(start, goal)
+    print "\n Calculating shortest path from #{start} to #{goal} .... \n"
+    current = Position.new(start)
+    arrays['queue'] << current
+  end
+
+  def move_result_push(move_result, current)
+    move_result = Position.new(move_result)
+    push_to_arr(arrays, current, move_result) unless arrays['visited'].include?(move_result)
+    move_result
+  end
+
+  def push_to_arr(arrays, current, move_result)
     arrays['previous_nodes'] << move_result.previous(current)
     arrays['queue'].push(move_result)
     arrays['visited'].push(move_result)
-    current.add_adjacent(move_result)
   end
 end
 

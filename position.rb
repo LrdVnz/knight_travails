@@ -6,11 +6,6 @@ class Position
 
   def initialize(coords)
     @coords = coords
-    @adj_list = []
-  end
-
-  def add_adjacent(node)
-    adj_list << node
   end
 
   def previous(node)

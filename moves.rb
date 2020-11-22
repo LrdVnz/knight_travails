@@ -35,5 +35,4 @@ class Moves
   def check_move(move, pos)
     (pos[0] + move[0]).negative? || (pos[0] + move[0]) > 7 || (pos[1] + move[1]).negative? || (pos[1] + move[1]) > 7
   end
-
 end

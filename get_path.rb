@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 # helpers for the knight class
-module CalculatePath
-  def calculate_path(previous_nodes, start, goal)
+module GetPath
+  def get_path(previous_nodes, start, goal)
     list = previous_nodes.uniq
     current = list.last
     path = []
