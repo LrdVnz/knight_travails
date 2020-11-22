@@ -13,6 +13,8 @@ module GetPath
     show_path(start, goal)
   end
 
+  private 
+  
   def show_path(start, goal)
     result = []
     @path.each { |obj| result << obj.coords }

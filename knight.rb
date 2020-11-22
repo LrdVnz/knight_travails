@@ -33,6 +33,8 @@ class Knight < Moves
       end
     end
   end
+  
+  private
 
   def moveto_init(start, goal)
     print "\n Calculating shortest path from #{start} to #{goal} .... \n"
@@ -66,4 +68,4 @@ end
 
 k = Knight.new
 Board.new
-k.moveto([3, 3], [3, 4])
+k.moveto([3, 3], [0, 0])
