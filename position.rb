@@ -2,7 +2,7 @@
 
 # Position class for the moves of the knight
 class Position
-  attr_reader :coords, :adj_list, :previous_node
+  attr_reader :coords, :previous_node
 
   def initialize(coords)
     @coords = coords

@@ -10,25 +10,18 @@ class Board
   end
 
   def create_board
-    @j = 0
-    while @j < 8
+    8.times do |col_num|
       @row = []
-      @i = 0
-      push_row while @i < 8
-      @j += 1
-      @i = 0
+      8.times do |row_num|
+        coords = [col_num, row_num]
+        @row << coords
+      end
       board << @row
     end
     show_board(board)
   end
 
   private
-
-  def push_row
-    coords = [@j, @i]
-    @row << coords
-    @i += 1
-  end
 
   def show_board(board)
     print "Here's your board : \n "

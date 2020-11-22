@@ -17,10 +17,6 @@ class Moves
     ]
   end
 
-  def get_move(move_number)
-    @list[move_number]
-  end
-
   def make_move(move, pos)
     if check_move(move, pos)
       nil
